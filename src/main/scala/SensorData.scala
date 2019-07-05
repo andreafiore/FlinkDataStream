@@ -3,7 +3,8 @@ import java.util.Date
 
 object SensorData {
 
-  case class SensorData(date: Date,
+  case class SensorData(id:Int,
+                        date: Date,
                         temperature: Double,
                         humidity: Double,
                         light: Double,
@@ -17,10 +18,7 @@ object SensorData {
 
     val lines: Array[String] = line.split(",")
 
-    lines.foreach( line => {
-      println(line)
-    })
-
+    val id = lines(0).substring(1, lines(0).length - 1).toInt
     val date = sdf.parse(lines(1).substring(1, lines(1).length - 1))
     val temp = lines(2).trim.toDouble
     val humidity = lines(3).trim.toDouble
@@ -29,8 +27,6 @@ object SensorData {
     val ratio = lines(6).trim.toDouble
     val occupancy = lines(7).trim.toInt
 
-    println(date)
-
-    SensorData(date, temp, humidity, light, co2, ratio, occupancy)
+    SensorData(id, date, temp, humidity, light, co2, ratio, occupancy)
   }
 }
