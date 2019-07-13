@@ -1,11 +1,8 @@
 
-import java.lang
-
 import SensorData.SensorData
-import org.apache.flink.api.common.typeinfo.TypeInformation
+import org.apache.flink.api.scala._
 import org.apache.flink.streaming.api.functions.sink.SinkFunction
 import org.apache.flink.streaming.api.functions.timestamps.BoundedOutOfOrdernessTimestampExtractor
-import org.apache.flink.streaming.api.functions.windowing.ProcessAllWindowFunction
 import org.apache.flink.streaming.api.windowing.assigners.SlidingEventTimeWindows
 import org.apache.flink.streaming.api.windowing.time.Time
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow
@@ -22,11 +19,6 @@ object SensorDataJob {
     val dataStream = Stream.stream
 
     SensorDataSink.values.clear()
-
-    implicit val typeInfo = TypeInformation.of(classOf[SensorData])
-    implicit val typeInfoInt = TypeInformation.of(classOf[Int])
-    implicit val typeInfoDouble = TypeInformation.of(classOf[Double])
-
 
     /*
       this code is to partition the stream by key
