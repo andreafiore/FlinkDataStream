@@ -1,14 +1,11 @@
 
 import SensorData.SensorData
 import org.apache.flink.api.scala._
-import org.apache.flink.streaming.api.functions.sink.SinkFunction
 import org.apache.flink.streaming.api.functions.timestamps.BoundedOutOfOrdernessTimestampExtractor
 import org.apache.flink.streaming.api.windowing.assigners.SlidingEventTimeWindows
 import org.apache.flink.streaming.api.windowing.time.Time
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow
 import org.apache.flink.util.Collector
-
-import scala.collection.mutable.ArrayBuffer
 
 object SensorDataJob {
 
