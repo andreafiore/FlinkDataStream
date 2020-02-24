@@ -6,8 +6,6 @@ import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironm
 
 object Stream {
 
-
-
   val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
 
   env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime)
@@ -17,8 +15,5 @@ object Stream {
 
   val stream: DataStream[SensorData] = env.readTextFile("src/main/resources/data.csv")
     .map(line => SensorData.parseFromCsvLine(line))
-
-
-
 
 }
