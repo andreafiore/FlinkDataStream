@@ -18,7 +18,8 @@ object SensorDataJob {
 
     val dataStream = Stream.stream
 
-    SensorDataSink.values.clear()
+    val sensorDataSink = new SensorDataSink()
+
 
     /*
       this code is to partition the stream by key
@@ -38,20 +39,6 @@ object SensorDataJob {
 
     env.execute("Sensor Data Stream job")
 
-  }
-
-
-  object SensorDataSink {
-    var values: ArrayBuffer[SensorData] = scala.collection.mutable.ArrayBuffer[SensorData]()
-  }
-
-  class SensorDataSink extends SinkFunction[SensorData] {
-
-    override def invoke(value: SensorData): Unit = {
-      synchronized {
-        SensorDataSink.values += value
-      }
-    }
   }
 
 
