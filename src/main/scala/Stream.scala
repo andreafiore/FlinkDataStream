@@ -6,13 +6,18 @@ import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironm
 
 object Stream {
 
+  implicit val typeInfo = TypeInformation.of(classOf[SensorData])
+
   val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
   env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime)
   env.setParallelism(1)
 
-  implicit val typeInfo = TypeInformation.of(classOf[SensorData])
-
-  def createDataStream(filePath: String): DataStream[SensorData] =
+  def createDataStream(filePath: String): DataStream[SensorData] = {
     env.readTextFile(filePath).map(line => SensorData.parseFromCsvLine(line))
+  }
+
+  def execute(): Unit = {
+    env.execute("Sensor Data Stream")
+  }
 
 }
