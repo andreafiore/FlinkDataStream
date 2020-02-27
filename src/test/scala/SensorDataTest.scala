@@ -1,7 +1,5 @@
 
 import java.text.SimpleDateFormat
-import java.time.Instant
-import java.util.Calendar
 
 import SensorData.SensorData
 import org.junit.{Assert, Test}

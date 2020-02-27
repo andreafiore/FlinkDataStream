@@ -24,7 +24,6 @@ class SensorDataSinkTest {
     sink.invoke(sensorData2)
 
     Assert.assertEquals(2, sink.size)
-
     sink.clearSink()
     Assert.assertEquals(0, sink.size)
   }
