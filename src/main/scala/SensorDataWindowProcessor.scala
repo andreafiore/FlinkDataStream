@@ -36,15 +36,15 @@ class SensorDataAllWindowProcessor extends ProcessAllWindowFunction[SensorData, 
   }
 
   def averageSensorData(list: List[SensorData]): SensorData.SensorData = {
-    val sortedList = list.sortBy(_.id).reverse
-    val id = sortedList.head.id
-    val date = sortedList.head.date
-    val temperatureAvg = calculateAverageValue(sortedList.map(_.temperature))
-    val humidityAvg = calculateAverageValue(sortedList.map(_.humidity))
-    val lightAvg = calculateAverageValue(sortedList.map(_.light))
-    val co2Avg = calculateAverageValue(sortedList.map(_.co2))
-    val humidityRatioAvg = calculateAverageValue(sortedList.map(_.humidityRatio))
-    val occupancyAvg = calculateAverageOccupancy(sortedList.map(_.occupancy))
+    val reverseSortedList = list.sortBy(_.id).reverse
+    val id = reverseSortedList.head.id
+    val date = reverseSortedList.head.date
+    val temperatureAvg = calculateAverageValue(reverseSortedList.map(_.temperature))
+    val humidityAvg = calculateAverageValue(reverseSortedList.map(_.humidity))
+    val lightAvg = calculateAverageValue(reverseSortedList.map(_.light))
+    val co2Avg = calculateAverageValue(reverseSortedList.map(_.co2))
+    val humidityRatioAvg = calculateAverageValue(reverseSortedList.map(_.humidityRatio))
+    val occupancyAvg = calculateAverageOccupancy(reverseSortedList.map(_.occupancy))
 
     new SensorData.SensorData(id, date,temperatureAvg, humidityAvg, lightAvg, co2Avg, humidityRatioAvg, occupancyAvg)
   }

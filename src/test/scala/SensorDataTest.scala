@@ -1,5 +1,6 @@
 
 import java.text.SimpleDateFormat
+import java.util.{Calendar, Date}
 
 import SensorData.SensorData
 import org.junit.{Assert, Test}
@@ -31,12 +32,13 @@ class SensorDataTest {
 
   @Test
   def parseDateFromStringTest(): Unit = {
-    val sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
     val s = s""""2020-02-15 11:30:35""""
-    val expectedDate = sdf.parse(s.substring(1, s.length - 1))
+    val calendar = Calendar.getInstance()
+    calendar.set(2020, 1, 15, 11, 30, 35)
+    calendar.set(Calendar.MILLISECOND, 0)
+    val expectedDate: Date = calendar.getTime
     val date = SensorData.parseDateFromString(s)
     Assert.assertEquals(expectedDate, date)
-
   }
 
   @Test

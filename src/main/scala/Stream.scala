@@ -3,10 +3,11 @@ import SensorData.SensorData
 import org.apache.flink.api.common.typeinfo.TypeInformation
 import org.apache.flink.streaming.api.TimeCharacteristic
 import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment}
-import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows
+import org.apache.flink.streaming.api.windowing.assigners.{SlidingEventTimeWindows, SlidingProcessingTimeWindows, TumblingEventTimeWindows}
 import org.apache.flink.streaming.api.windowing.time.Time
 
 object Stream {
+
 
   implicit val typeInfo = TypeInformation.of(classOf[SensorData])
 
@@ -24,6 +25,11 @@ object Stream {
       .process(new SensorDataAllWindowProcessor())
   }
 
+  def createSlidingEventTimeWindow(dataStream: DataStream[SensorData]): DataStream[SensorData.SensorData] = {
+    dataStream.assignTimestampsAndWatermarks(new SensorDataTimestampExtractor(Time.minutes(2)))
+      .timeWindowAll(Time.minutes(10), Time.minutes(5))
+      .process(new SensorDataAllWindowProcessor())
+  }
   def execute(): Unit = {
     env.execute("Sensor Data Stream")
   }
