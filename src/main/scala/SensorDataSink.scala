@@ -3,21 +3,24 @@ import org.apache.flink.streaming.api.functions.sink.SinkFunction
 
 import scala.collection.mutable.ArrayBuffer
 
+object SensorDataSink {
 
-class SensorDataSink extends SinkFunction[SensorData] {
+  val values: ArrayBuffer[SensorData] = scala.collection.mutable.ArrayBuffer[SensorData]()
+}
 
-  private var values: ArrayBuffer[SensorData] = scala.collection.mutable.ArrayBuffer[SensorData]()
+  class SensorDataSink extends SinkFunction[SensorData] {
+
 
   override def invoke(value: SensorData): Unit = {
     synchronized {
-      values += value
+      SensorDataSink.values += value
     }
   }
 
   def size: Int = {
-    values.size
+    SensorDataSink.values.size
   }
 
-  def clearSink() = values.clear()
+  def clearSink() = SensorDataSink.values.clear()
 }
 

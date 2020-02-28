@@ -13,23 +13,38 @@ class SensorDataWindowProcessorTest {
     val sd2 = SensorData.SensorData(2, new Date(), 14.0, 12.3, 14.5, 17.5, 55.0, 0)
     val sd3 = SensorData.SensorData(3, new Date(), 10.0, 11.2, 13.5, 14.5, 50.0, 0)
     val sd4 = SensorData.SensorData(4, new Date(), 15.5, 11.5, 13.3, 14.5, 50.0, 1)
+    val sd5 = SensorData.SensorData(5, new Date(), 17, 13, 11, 20.5, 50.0, 1)
 
-    list = List(sd1, sd2, sd3, sd4)
+    list = List(sd1, sd2, sd3, sd4, sd5)
   }
 
 
   @Test
-  def calculateAverageTemperatureTest(): Unit = {
+  def calculateAverageValueTest(): Unit = {
+    val avgTemp = processor.calculateAverageValue(list.map(sd => sd.temperature))
 
-    var sumTemp: Double = 0
+    Assert.assertEquals(13.7,avgTemp , 0.001)
+  }
 
-     list.foreach( sd => {
-      sumTemp = sumTemp + sd.temperature
-    })
-    val expectedAvg = sumTemp / list.size
-    val avgTemp = processor.calculateAverageTemperature(list)
+  @Test
+  def calculateAverageOccupancy(): Unit = {
+    val actualAvgOccupancy = processor.calculateAverageOccupancy(list.map(sd => sd.occupancy))
 
-    Assert.assertEquals(expectedAvg, avgTemp, 0.001)
+    Assert.assertEquals(1, actualAvgOccupancy)
+  }
+
+  @Test
+  def averageSensorDataTest(): Unit = {
+    val avgSensorData = processor.averageSensorData(list)
+
+    Assert.assertEquals(5, avgSensorData.id)
+    Assert.assertEquals(list(4).date, avgSensorData.date)
+    Assert.assertEquals(13.7, avgSensorData.temperature, 0.001)
+    Assert.assertEquals(16.5, avgSensorData.humidity, 0.001)
+    Assert.assertEquals(12.5, avgSensorData.light, 0.001)
+    Assert.assertEquals(22.5, avgSensorData.co2, 0.001)
+    Assert.assertEquals(52.2, avgSensorData.humidityRatio, 0.001)
+    Assert.assertEquals(1, avgSensorData.occupancy)
   }
 
 }
