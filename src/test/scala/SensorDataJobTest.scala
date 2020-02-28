@@ -1,6 +1,4 @@
 import org.apache.flink.api.common.typeinfo.TypeInformation
-import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows
-import org.apache.flink.streaming.api.windowing.time.Time
 import org.junit.{Assert, Test}
 
 class SensorDataJobTest {
@@ -9,14 +7,11 @@ class SensorDataJobTest {
 
   @Test
   def sensorDataJobTest(): Unit = {
-    val dataStream = Stream.createDataStream("src/test/resources/data_test.csv")
 
     val sensorDataSink = new SensorDataSink()
 
-    dataStream.assignTimestampsAndWatermarks(new SensorDataTimestampExtractor(Time.minutes(2)))
-      .windowAll(TumblingEventTimeWindows.of(Time.minutes(10)))
-      .process(new SensorDataAllWindowProcessor())
-      .addSink(sensorDataSink)
+    val dataStream = Stream.createDataStream("src/test/resources/data_test.csv")
+        .addSink(sensorDataSink)
 
     Stream.execute()
 
