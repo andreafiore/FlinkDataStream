@@ -4,9 +4,10 @@ object SensorDataJob {
 
   def main(args: Array[String]): Unit = {
 
-    val sink = new SensorDataSink()
+    val sensorDataSink = new SensorDataSink()
 
-    Stream.createDataStream("src/main/resources/data.csv").addSink(sink)
+    val dataStream = Stream.createDataStream("src/main/resources/data.csv")
+    Stream.createTumblingEventTimeWindowsStream(dataStream).addSink(sensorDataSink)
 
     Stream.execute()
   }

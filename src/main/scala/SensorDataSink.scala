@@ -10,7 +10,6 @@ object SensorDataSink {
 
 class SensorDataSink extends SinkFunction[SensorData] {
 
-
   override def invoke(value: SensorData): Unit = {
     synchronized {
       SensorDataSink.values += value

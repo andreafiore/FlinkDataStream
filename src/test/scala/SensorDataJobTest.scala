@@ -11,7 +11,8 @@ class SensorDataJobTest {
     val sensorDataSink = new SensorDataSink()
 
     val dataStream = Stream.createDataStream("src/test/resources/data_test.csv")
-        .addSink(sensorDataSink)
+
+    Stream.createTumblingEventTimeWindowsStream(dataStream).addSink(sensorDataSink)
 
     Stream.execute()
 

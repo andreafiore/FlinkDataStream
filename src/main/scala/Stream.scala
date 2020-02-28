@@ -16,7 +16,10 @@ object Stream {
 
   def createDataStream(filePath: String): DataStream[SensorData] = {
     env.readTextFile(filePath).map(line => SensorData.parseFromCsvLine(line))
-    .assignTimestampsAndWatermarks(new SensorDataTimestampExtractor(Time.minutes(2)))
+  }
+
+  def createTumblingEventTimeWindowsStream(dataStream: DataStream[SensorData.SensorData]): DataStream[SensorData.SensorData] = {
+    dataStream.assignTimestampsAndWatermarks(new SensorDataTimestampExtractor(Time.minutes(2)))
       .windowAll(TumblingEventTimeWindows.of(Time.minutes(10)))
       .process(new SensorDataAllWindowProcessor())
   }
