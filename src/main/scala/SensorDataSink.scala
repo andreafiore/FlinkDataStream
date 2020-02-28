@@ -8,7 +8,7 @@ object SensorDataSink {
   val values: ArrayBuffer[SensorData] = scala.collection.mutable.ArrayBuffer[SensorData]()
 }
 
-  class SensorDataSink extends SinkFunction[SensorData] {
+class SensorDataSink extends SinkFunction[SensorData] {
 
 
   override def invoke(value: SensorData): Unit = {
