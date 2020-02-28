@@ -20,7 +20,7 @@ class SensorDataJobTest {
 
     Stream.execute()
 
-    Assert.assertEquals(5, sensorDataSink.size)
+    Assert.assertEquals(3, sensorDataSink.size)
   }
 
 }
