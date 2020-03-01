@@ -8,10 +8,10 @@ object SensorDataJob {
 
     val sensorDataSink = new SensorDataSink()
 
-    val dataStream = Stream.createDataStream("src/main/resources/data.csv")
-    Stream.createTumblingEventTimeWindowsStream(dataStream).addSink(sensorDataSink)
+    val dataStream = SensorDataStream.createDataStream("src/main/resources/data.csv")
+    SensorDataStream.createTumblingEventTimeWindowsStream(dataStream).addSink(sensorDataSink)
 
-    Stream.execute()
+    SensorDataStream.execute()
 
     SensorDataSink.values.foreach( sensorData => {
       logger.info(s"Sensor Data $sensorData")

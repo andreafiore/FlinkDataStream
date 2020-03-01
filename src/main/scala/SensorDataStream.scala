@@ -6,7 +6,7 @@ import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironm
 import org.apache.flink.streaming.api.windowing.assigners.{SlidingEventTimeWindows, SlidingProcessingTimeWindows, TumblingEventTimeWindows}
 import org.apache.flink.streaming.api.windowing.time.Time
 
-object Stream {
+object SensorDataStream {
 
 
   implicit val typeInfo = TypeInformation.of(classOf[SensorData])

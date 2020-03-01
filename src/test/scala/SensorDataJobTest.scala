@@ -14,18 +14,18 @@ class SensorDataJobTest {
 
   @Test
   def tumblingEventTimeWindowsTest() = {
-    val dataStream = Stream.createDataStream("src/test/resources/data_test.csv")
-    Stream.createTumblingEventTimeWindowsStream(dataStream).addSink(sink)
-    Stream.execute()
+    val dataStream = SensorDataStream.createDataStream("src/test/resources/data_test.csv")
+    SensorDataStream.createTumblingEventTimeWindowsStream(dataStream).addSink(sink)
+    SensorDataStream.execute()
 
     Assert.assertEquals(3, sink.size)
   }
 
   @Test
   def slidingEventTimeWindowTest() = {
-    val dataStream = Stream.createDataStream("src/test/resources/slidingEventTimeWindows_data.csv")
-    Stream.createSlidingEventTimeWindow(dataStream).addSink(sink)
-    Stream.execute()
+    val dataStream = SensorDataStream.createDataStream("src/test/resources/slidingEventTimeWindows_data.csv")
+    SensorDataStream.createSlidingEventTimeWindow(dataStream).addSink(sink)
+    SensorDataStream.execute()
 
     SensorDataSink.values.toIterable.foreach( value => {
       println(value)
