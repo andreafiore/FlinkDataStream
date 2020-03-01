@@ -1,11 +1,21 @@
-import org.apache.log4j.Logger
+
+import org.apache.logging.log4j.LogManager
 
 object SensorDataJob {
 
   def main(args: Array[String]): Unit = {
 
-    val logger: Logger = Logger.getLogger("SensorDataJob")
+    val executor = new SensorDataJobExecutor
 
+    executor.init()
+
+  }
+}
+
+class SensorDataJobExecutor {
+
+  val logger = LogManager.getLogger(classOf[SensorDataJobExecutor])
+  def init() = {
     val sensorDataSink = new SensorDataSink()
 
     val dataStream = SensorDataStream.createDataStream("src/main/resources/data.csv")
@@ -17,5 +27,4 @@ object SensorDataJob {
       logger.info(s"Sensor Data $sensorData")
     })
   }
-
 }
