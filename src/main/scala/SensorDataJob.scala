@@ -9,6 +9,9 @@ object SensorDataJob {
 
     executor.execute()
 
+    SensorDataSink.values.foreach( sd => {
+      executor.logger.info(s"SENSOR DATA AGGREGATED: $sd")
+    })
   }
 }
 
@@ -23,9 +26,5 @@ class SensorDataJobExecutor {
     SensorDataStream.createTumblingEventTimeWindowsStream(dataStream).addSink(sensorDataSink)
 
     SensorDataStream.execute()
-
-    SensorDataSink.values.foreach( sensorData => {
-      logger.info(s"Sensor Data $sensorData")
-    })
   }
 }
