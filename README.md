@@ -1,15 +1,15 @@
-#FlinkDataStream
+# FlinkDataStream
 This is a sample project to show the usage of Apache Flink.
 In this example a stream is used to read data from sensor measurements (temperature, humidity, light, co2, occupancy) 
 and aggregate them using a temporal window.
 
-##Getting Started
+## Getting Started
 
-###Prerequisites
+### Prerequisites
 
 In order to run the program you must have on your local machine Maven and Scala 2.11
 
-###Installing
+### Installing
 
 To install the program type in the root folder
 
@@ -17,7 +17,7 @@ To install the program type in the root folder
 mvn compile
 ```
 
-###Testing
+### Testing
 
 To run the tests type in the root folder
 
@@ -25,7 +25,7 @@ To run the tests type in the root folder
 mvn test
 ```
 
-###Run
+### Run
 
 To run the program type in the root folder
 
@@ -33,5 +33,5 @@ To run the program type in the root folder
 mvn exec:java -Dexec.mainClass="SensorDataJob" -Dexec.cleanupDaemonThreads=false
 ```
 
-##Author
+## Author
 Andrea Fiore
