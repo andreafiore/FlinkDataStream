@@ -15,6 +15,7 @@ object SensorDataJob {
 class SensorDataJobExecutor {
 
   val logger = LogManager.getLogger(classOf[SensorDataJobExecutor])
+
   def execute() = {
     val sensorDataSink = new SensorDataSink()
 
