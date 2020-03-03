@@ -28,6 +28,7 @@ mvn test
 ###Run
 
 To run the program type in the root folder
+
 ```
 mvn exec:java -Dexec.mainClass="SensorDataJob" -Dexec.cleanupDaemonThreads=false
 ```
