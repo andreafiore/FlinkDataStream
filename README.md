@@ -1,4 +1,4 @@
-# FlinkDataStream
+#FlinkDataStream
 This is a sample project to show the usage of Apache Flink.
 In this example a stream is used to read data from sensor measurements (temperature, humidity, light, co2, occupancy) 
 and aggregate them using a temporal window.
