@@ -7,7 +7,7 @@ object SensorDataJob {
 
     val executor = new SensorDataJobExecutor
 
-    executor.init()
+    executor.execute()
 
   }
 }
@@ -15,7 +15,7 @@ object SensorDataJob {
 class SensorDataJobExecutor {
 
   val logger = LogManager.getLogger(classOf[SensorDataJobExecutor])
-  def init() = {
+  def execute() = {
     val sensorDataSink = new SensorDataSink()
 
     val dataStream = SensorDataStream.createDataStream("src/main/resources/data.csv")
