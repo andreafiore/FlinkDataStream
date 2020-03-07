@@ -32,13 +32,14 @@ class SensorDataTest {
 
   @Test
   def parseDateFromStringTest(): Unit = {
-    val s = s""""2020-02-15 11:30:35""""
+    val s = s""""2015-02-02 14:19:59""""
     val calendar = Calendar.getInstance()
-    calendar.set(2020, 1, 15, 11, 30, 35)
+    calendar.set(2015, 1, 2, 14, 19, 59)
     calendar.set(Calendar.MILLISECOND, 0)
     val expectedDate: Date = calendar.getTime
-    val date = SensorData.parseDateFromString(s)
-    Assert.assertEquals(expectedDate, date)
+    val actualDate = SensorData.parseDateFromString(s)
+    println(actualDate.toString)
+    Assert.assertEquals(expectedDate, actualDate)
   }
 
   @Test
